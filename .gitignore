@@ -89,3 +89,5 @@ fabric.properties
 # Custom Intellij
 .idea/*.iml
 .idea/*.xml
+.idea/modules/*.iml
+.idea/modules/*.xml
