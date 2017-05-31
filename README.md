@@ -1,2 +1,2 @@
 # HotSliggityBatch
-Spring Batch for me to convert copied info to cleaner format
+Spring Batch for me to convert copied info from hotslogs to a cleaner format
