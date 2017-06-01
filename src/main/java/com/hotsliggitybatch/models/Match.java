@@ -80,12 +80,16 @@ public class Match implements ResourceAware {
 
     @Override
     public void setResource(Resource resource) {
-        if (resource.getFilename().equals("hotsliggity_heroleague.txt")) {
-            this.matchType = "heroleague";
-        }
-
-        if (resource.getFilename().contains("quickmatch")) {
-            this.matchType = "quickmatch";
+        if (resource.getFilename().equals("hotsliggity_quickmatch.txt")) {
+            this.matchType = "Quickmatch";
+        } else if (resource.getFilename().equals("hotsliggity_unrankeddraft.txt")) {
+            this.matchType = "Unranked Draft";
+        } else if (resource.getFilename().equals("hotsliggity_heroleague.txt")) {
+            this.matchType = "Hero League";
+        } else if (resource.getFilename().equals("hotsliggity_teamleague.txt")) {
+            this.matchType = "Team League";
+        } else {
+            //TODO catch exception to prevent bad data
         }
     }
 }
