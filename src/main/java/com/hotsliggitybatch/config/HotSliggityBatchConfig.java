@@ -62,18 +62,18 @@ public class HotSliggityBatchConfig
 
     private DefaultLineMapper<Match> lineMapper() {
         DefaultLineMapper<Match> lineMapper = new DefaultLineMapper<Match>();
-        lineMapper.setLineTokenizer(tokenizer());
+        lineMapper.setLineTokenizer(delimitedLineTokenizer());
         lineMapper.setFieldSetMapper(fieldSetMapper());
 
         return lineMapper;
     }
 
-    private DelimitedLineTokenizer tokenizer() {
-        DelimitedLineTokenizer tokenizer = new DelimitedLineTokenizer();
-        tokenizer.setStrict(false);
-        tokenizer.setDelimiter(DelimitedLineTokenizer.DELIMITER_TAB);
-        tokenizer.setNames(new String[] {
-                "leadingFiller",
+    private DelimitedLineTokenizer delimitedLineTokenizer() {
+        DelimitedLineTokenizer delimitedLineTokenizer = new DelimitedLineTokenizer();
+        delimitedLineTokenizer.setStrict(false);
+        delimitedLineTokenizer.setDelimiter(DelimitedLineTokenizer.DELIMITER_TAB);
+        delimitedLineTokenizer.setNames(new String[] {
+                "matchType",
                 "mapName",
                 "matchLength",
                 "heroName",
@@ -83,7 +83,7 @@ public class HotSliggityBatchConfig
                 "matchDateTime"
         });
 
-        return tokenizer;
+        return delimitedLineTokenizer;
     }
 
     private BeanWrapperFieldSetMapper<Match> fieldSetMapper() {

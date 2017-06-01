@@ -1,8 +1,11 @@
 package com.hotsliggitybatch.models;
 
 
-public class Match {
-    private String leadingFiller;
+import org.springframework.batch.item.ResourceAware;
+import org.springframework.core.io.Resource;
+
+public class Match implements ResourceAware {
+    private String matchType;
     private String mapName;
     private String matchLength;
     private String heroName;
@@ -11,12 +14,12 @@ public class Match {
     private String ratingAdjustmentPoints;
     private String matchDateTime;
 
-    public String getLeadingFiller() {
-        return leadingFiller;
+    public String getMatchType() {
+        return matchType;
     }
 
-    public void setLeadingFiller(String leadingFiller) {
-        this.leadingFiller = leadingFiller;
+    public void setMatchType(String matchType) {
+        this.matchType = matchType;
     }
 
     public String getMapName() {
@@ -75,4 +78,14 @@ public class Match {
         this.matchDateTime = matchDateTime;
     }
 
+    @Override
+    public void setResource(Resource resource) {
+        if (resource.getFilename().equals("hotsliggity_heroleague.txt")) {
+            this.matchType = "heroleague";
+        }
+
+        if (resource.getFilename().contains("quickmatch")) {
+            this.matchType = "quickmatch";
+        }
+    }
 }

@@ -16,7 +16,7 @@ public class MatchToMatchLogMapper {
 
         MatchLog matchLog = new MatchLog();
 
-        matchLog.setMatchType(deriveMatchType());
+        matchLog.setMatchType(match.getMatchType());
         matchLog.setMapName(match.getMapName());
         matchLog.setMatchLength(match.getMatchLength());
         matchLog.setHeroName(match.getHeroName());
@@ -28,11 +28,6 @@ public class MatchToMatchLogMapper {
         matchLog.setSeason(deriveSeason(match.getMatchDateTime()));
 
         return matchLog;
-    }
-
-    private String deriveMatchType() {
-        //TODO determine best way to derive this information
-        return "";
     }
 
     private String deriveMatchOutcome(String ratingAdjustmentPoints) {
