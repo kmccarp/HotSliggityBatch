@@ -31,7 +31,7 @@ public class MatchToMatchLogMapper {
     }
 
     private String deriveMatchOutcome(String ratingAdjustmentPoints) {
-        //TODO [datastore] catch exception when ratingAdjustmentPoints cannot convert to Integer
+        //TODO catch exception when ratingAdjustmentPoints cannot convert to Integer
         if(Integer.valueOf(ratingAdjustmentPoints) <= 0) {
             return "loss";
         }
@@ -54,7 +54,7 @@ public class MatchToMatchLogMapper {
             }
         }
 
-        //TODO [datastore] throw custom exception to prevent bad data
+        //TODO throw custom exception to prevent bad data
         return "";
     }
 }

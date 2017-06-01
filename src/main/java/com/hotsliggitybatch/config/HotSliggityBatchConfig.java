@@ -2,6 +2,7 @@ package com.hotsliggitybatch.config;
 
 import com.hotsliggitybatch.models.Match;
 import com.hotsliggitybatch.models.MatchLog;
+import com.hotsliggitybatch.tasklets.HotSliggityRequestTasklet;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
@@ -33,14 +34,19 @@ public class HotSliggityBatchConfig
     private Resource[] resources;
 
     @Bean
-    public Job hotSliggityBatchJob(@Qualifier("step1") Step step1) {
-        return jobBuilderFactory.get("hotSliggityBatchJob").start(step1).build();
+    public Job hotSliggityBatchJob(@Qualifier("step1") Step step1, @Qualifier("step2") Step step2) {
+        return jobBuilderFactory.get("hotSliggityBatchJob").start(step1).next(step2).build();
     }
 
     @Bean
     public Step step1(ItemReader<Match> itemReader, ItemProcessor<Match, MatchLog> itemProcessor) {
         return stepBuilderFactory.get("readAndProcessMatches").<Match, MatchLog> chunk(10)
                 .reader(multiResourceItemReader()).processor(itemProcessor).build();
+    }
+
+    @Bean
+    public Step step2(HotSliggityRequestTasklet hotSliggityRequestTasklet) {
+        return stepBuilderFactory.get("buildRequest").tasklet(hotSliggityRequestTasklet).build();
     }
 
     @Bean
