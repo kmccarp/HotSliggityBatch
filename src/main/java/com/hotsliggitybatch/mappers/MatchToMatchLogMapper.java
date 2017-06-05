@@ -51,10 +51,10 @@ public class MatchToMatchLogMapper {
     private String deriveMatchOutcome(String ratingAdjustmentPoints) {
         //TODO catch exception when ratingAdjustmentPoints cannot convert to Integer
         if(Integer.valueOf(ratingAdjustmentPoints) <= 0) {
-            return "loss";
+            return "Loss";
         }
         else {
-            return "win";
+            return "Win";
         }
     }
 
