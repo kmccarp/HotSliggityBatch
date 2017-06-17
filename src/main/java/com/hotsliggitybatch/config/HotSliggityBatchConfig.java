@@ -61,6 +61,7 @@ public class HotSliggityBatchConfig
     public FlatFileItemReader<Match> reader() {
         FlatFileItemReader<Match> fileReader = new FlatFileItemReader<Match>();
         fileReader.setStrict(false);
+        fileReader.setLinesToSkip(1);
         fileReader.setLineMapper(lineMapper());
 
         return fileReader;
@@ -77,16 +78,29 @@ public class HotSliggityBatchConfig
     private DelimitedLineTokenizer delimitedLineTokenizer() {
         DelimitedLineTokenizer delimitedLineTokenizer = new DelimitedLineTokenizer();
         delimitedLineTokenizer.setStrict(false);
-        delimitedLineTokenizer.setDelimiter(DelimitedLineTokenizer.DELIMITER_TAB);
+        delimitedLineTokenizer.setDelimiter(DelimitedLineTokenizer.DELIMITER_COMMA);
+        delimitedLineTokenizer.setQuoteCharacter('"');
+
+        // you can see the full list of fields below with comments.
+        // these are the indices with names we care about.
+        delimitedLineTokenizer.setIncludedFields(new int[]{2, 3, 4, 6, 7, 8, 9, 10});
+
         delimitedLineTokenizer.setNames(new String[] {
-                "matchType",
+                // empty string
+                // replay id
                 "mapName",
                 "matchLength",
                 "heroName",
+                // second instance of hero name for whatever reason
                 "heroLevel",
+                "winLoss", // new: binary representation of win/loss (1 for win, 0 for loss)
                 "matchmakingRating",
                 "ratingAdjustmentPoints",
-                "matchDateTime"
+                "matchDateTime",
+                // empty string
+                // share replay; why the heck is this here
+                // empty string
+                // empty string
         });
 
         return delimitedLineTokenizer;

@@ -13,6 +13,22 @@ public class Match implements ResourceAware {
     private String matchmakingRating;
     private String ratingAdjustmentPoints;
     private String matchDateTime;
+    private String winLoss;
+
+    @Override
+    public String toString() {
+        return "Match{" +
+                "matchType='" + matchType + '\'' +
+                ", mapName='" + mapName + '\'' +
+                ", matchLength='" + matchLength + '\'' +
+                ", heroName='" + heroName + '\'' +
+                ", heroLevel='" + heroLevel + '\'' +
+                ", matchmakingRating='" + matchmakingRating + '\'' +
+                ", ratingAdjustmentPoints='" + ratingAdjustmentPoints + '\'' +
+                ", matchDateTime='" + matchDateTime + '\'' +
+                ", winLoss='" + winLoss + '\'' +
+                '}';
+    }
 
     public String getMatchType() {
         return matchType;
@@ -91,5 +107,13 @@ public class Match implements ResourceAware {
         } else {
             //TODO catch exception to prevent bad data
         }
+    }
+
+    public String getWinLoss() {
+        return winLoss;
+    }
+
+    public void setWinLoss(String winLoss) {
+        this.winLoss = winLoss;
     }
 }

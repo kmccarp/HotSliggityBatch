@@ -29,7 +29,7 @@ public class MatchToMatchLogMapper {
         matchLog.setRatingAdjustmentPoints(match.getRatingAdjustmentPoints());
         matchLog.setMatchDate(deriveMatchDate(match.getMatchDateTime()));
         matchLog.setMatchTime(deriveMatchTime(match.getMatchDateTime()));
-        matchLog.setMatchOutcome(deriveMatchOutcome(match.getRatingAdjustmentPoints()));
+        matchLog.setMatchOutcome(deriveMatchOutcome(match.getWinLoss()));
         matchLog.setSeason(deriveSeason(match.getMatchDateTime()));
 
         return matchLog;
@@ -47,9 +47,9 @@ public class MatchToMatchLogMapper {
         return stringTime;
     }
 
-    private String deriveMatchOutcome(String ratingAdjustmentPoints) {
+    private String deriveMatchOutcome(String winLoss) {
         //TODO catch exception when ratingAdjustmentPoints cannot convert to Integer
-        if(Integer.valueOf(ratingAdjustmentPoints) <= 0) {
+        if(Integer.valueOf(winLoss) == 0) {
             return "Loss";
         }
         else {
